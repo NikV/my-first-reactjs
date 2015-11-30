@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Cantarell);
+
+        html,body
+        {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Cantarell', Lucida Grande, sans-serif;
+            font-size: 100%;
+            line-height: 1.5;
+            text-align: center;
+        }
+        ul {
+            text-align: center;
+            display: inline-block;
+            list-style-type: none;
+            position: relative;
+
+        }
+        h3 {
+            background: #22A7F0;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 0 2px 2px;
+            font-size: 25px;
+            padding: 10px 1px 9px 41px;
+            position: relative;
+            top: -25px;
+        }
+
+        input[type=text] {
+            background: #22A7F0;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 0 2px 2px;
+            font-size: 25px;
+            position: relative;
+            top: -1px;
+            width: 100%;
+            height: 70px;
+            width:100%
+        }
+
+        ::-webkit-input-placeholder { color: white; }
+        ::-moz-placeholder { color: white; } /* firefox 19+ */
+        :-ms-input-placeholder { color: white; } /* ie */
+        input:-moz-placeholder { color: white; }
+
+        input, input:focus {
+            border: none;
+            outline: 0;
+
+        }
+        input[type=submit] {
+            border: 1px solid #ccc;
+            margin-left: 15px;
+            padding: 5px 15px;
+            font-size: 15px;
+
+        }
+        button {
+            box-shadow: none;
+            border: 1px solid black;
+            background-color: white;
+            font-size: 18px;
+            vertical-align: sub;
+            padding-top: 6px;
+            padding-bottom: 4px;
+        }
+        #todo {
+
+        }
+
+        li {
+            padding-top:10px;
+            padding-right: 360px;
+            padding-left: 360px;
+            padding-bottom: 10px;
+            border-radius: 1px;
+            border: 1px solid black;
+            margin-top: 8px;
+        }
+
+        #some-submit-button {
+            display: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://fb.me/react-0.12.2.min.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.12.2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+<div id="todo">
+<script type="text/jsx">
+    var Todo = React.createClass({
+        getInitialState: function() {
+          return {items:[]}
+        },
+
+        updateItems: function(newItem) {
+            var allItems = this.state.items.concat([newItem])
+            this.setState({items: allItems})
+        },
+
+        render: function() {
+            return (
+                    <div>
+                        <Form onFormSubmit={this.updateItems}/>
+
+                        <List items={this.state.items}/>
+                    </div>
+            );
+        }
+    })
+
+    var List = React.createClass({
+        render: function() {
+            var createItem = function(itemText) {
+                return (
+                        <TodoItem>{itemText}</TodoItem>
+                );
+            };
+            return <ul>{this.props.items.map(createItem)}</ul>;
+
+        }
+    })
+
+    var TodoItem = React.createClass({
+        render: function() {
+            return (
+                    <li>{this.props.children}</li>
+            );
+        }
+    })
+
+    var Form = React.createClass({
+        getInitialState: function() {
+            return {items: ''}
+            return {
+                disabled: false
+            };
+        },
+
+        handleSubmit: function(event) {
+            event.preventDefault()
+
+            this.props.onFormSubmit(this.state.item)
+            this.setState({item: ''})
+            React.findDOMNode(this.refs.item).focus();
+            return;
+        },
+
+        onChange: function(event) {
+            this.setState({
+                item: event.target.value
+            });
+        },
+
+        render: function() {
+            return (
+                    <div>
+                <form onSubmit={this.handleSubmit}>
+                    <input type='text' placeholder="What to do today..."  ref='item' onChange={this.onChange} value={this.state.item} />
+                    <button type="submit" id="some-submit-button"  value="SUBMIT" disabled={!this.state.item}>Add Task</button>
+
+                </form>
+                    </div>
+
+            );
+        }
+
+    })
+
+
+
+    React.render(<Todo/>, document.body)
+
+
+</script>
+</div>
+
+</body>
+</html>
