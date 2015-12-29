@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>States FTW!</title>
+    <script src="https://fb.me/react-0.12.2.min.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.12.2.js"></script>
+    <script>
+        function HtmlEncode(s)
+        {
+            var el = document.createElement("div");
+            el.innerText = el.textContent = s;
+            s = el.innerHTML;
+            return s;
+        }
+
+        alert(HtmlEncode('&;\'><"'));
+
+
+    </script>
+</head>
+<body>
+<script type="text/jsx">
+    var UIComponent = React.createClass({
+        getInitialState: function() {
+            return {
+                name: "Nikhil",
+                job:  "CEO",
+                dream_jobs: [
+                    "Google, ",
+                    "SpaceX",
+
+                ]
+            };
+
+        },
+
+        render : function() {
+            return <div>
+                My name is {this.state.name} and I am a {this.state.job}.
+
+                <div>
+                    Eventually, I'd like to work at {this.state.dream_jobs}.
+                </div>
+            </div>;
+        }
+
+    });
+
+
+
+
+    React.renderComponent(
+            <UIComponent />,
+            document.body
+    );
+</script>
+
+</body>
+</html>

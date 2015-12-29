@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+        html,body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+        }
+
+        body {
+            text-align: center;
+            background: rgb(244, 244, 244);
+            color: black;
+            font-family: Lato;
+        }
+
+        textarea {
+            padding: 10px;
+            border: solid 5px #c9c9c9;
+            box-shadow: inset 0 0 0 1px #707070;
+            transition: box-shadow 0.3s, border 0.3s;
+
+        }
+
+        textarea:focus {
+            border: solid 5px #969696;
+            outline: 0;
+
+        }
+
+        h2 {
+            font-family: Lato;
+            background: #3F50B5;
+            margin-top: 0;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            color: white;
+            box-shadow: -1px -2px 17px black;
+
+        }
+
+
+        button {
+            border: 1px solid black;
+            box-shadow: none;
+            background: none;
+            outline: 0;
+            padding: 14px;
+            width: 22%;
+            margin-top: 2px;
+        }
+
+        input {
+            margin-top: 10px;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://fb.me/react-0.12.2.min.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.12.2.js"></script>
+</head>
+<body>
+
+<script type="text/jsx">
+    var Search = React.createClass({
+        getInitialState: function() {
+            return {
+                search: ''
+            };
+
+        },
+        render: function() {
+          return (
+                  <div className="search-comp">
+                      <p>Do a quick search!</p>
+                      <input type="text" onChange={this.searchChange} />
+                      <p>Couldn't find anything matching: {this.state.search}</p>
+                  </div>
+
+          );
+        },
+        searchChange: function(event) {
+            var text = event.target.value
+
+            this.setState({
+                search: text
+            })
+        }
+    });
+
+    React.render(<Search />, document.body);
+</script>
+
+</body>
+</html>
